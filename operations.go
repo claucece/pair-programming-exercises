@@ -1,7 +1,7 @@
 package operations
 
-import "fmt"
+type number int
 
-func main() {
-	fmt.Println("pair programming")
+func (x number) Add(y number) number {
+	return x + y
 }
