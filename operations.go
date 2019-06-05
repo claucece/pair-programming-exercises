@@ -17,3 +17,7 @@ func (x number) substr(b number) number {
 func (x number) Multiplication(y number) number {
 	return x * y
 }
+
+func (x number) Divide(divident number) (float32, string) {
+	return float32(x / divident), ""
+}

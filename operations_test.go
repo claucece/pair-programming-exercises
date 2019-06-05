@@ -50,3 +50,48 @@ func (s *OperationsSuite) Test_Double_Multiplication(c *C) {
 	z = x.Multiplication(y).Multiplication(10)
 	c.Assert(z, Equals, number(160))
 }
+
+func (s *OperationsSuite) Test_Divide_Int(c *C) {
+	var divisor number
+	var divident number
+	var expectedResult float32
+	var actualResult float32
+
+	divisor = 4
+	divident = 2
+	expectedResult = 2
+
+	actualResult, s = divisor.Divide(divident)
+
+	c.Assert(s, Equals, expectedResult)
+}
+
+func (s *OperationsSuite) Test_Divide_Float(c *C) {
+	var divisor number
+	var divident number
+	var expectedResult float32
+	var actualResult float32
+
+	divisor = 5
+	divident = 2
+	expectedResult = 2.5
+
+	actualResult = divisor.Divide(divident)
+
+	c.Assert(actualResult, Equals, expectedResult)
+}
+
+func (s *OperationsSuite) Test_Divide_Zero(c *C) {
+	var divisor number
+	var divident number
+	var expectedResult string
+	var actual_result string
+
+	divisor = 5
+	divident = 0
+	expectedResult = "NaN"
+
+	actualResult = divisor.Divide(divident)
+
+	c.Assert(actualResult, Equals, expectedResult)
+}
