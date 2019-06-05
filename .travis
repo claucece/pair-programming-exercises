@@ -1,0 +1,13 @@
+language: go
+
+go:
+  - tip
+  - "1.10.3"
+  - 1.9.7
+
+script: make ci
+
+matrix:
+  allow_failures:
+    - go: tip
+  fast_finish: true
