@@ -1,6 +1,7 @@
 package operations
 
 import (
+	"math"
 	"testing"
 
 	. "gopkg.in/check.v1"
@@ -61,16 +62,14 @@ func (s *OperationsSuite) Test_Divide_Int(c *C) {
 	divident = 2
 	expectedResult = 2
 
-	actualResult, s = divisor.Divide(divident)
+	actualResult = divisor.Divide(divident)
 
-	c.Assert(s, Equals, expectedResult)
+	c.Assert(actualResult, Equals, expectedResult)
 }
 
-func (s *OperationsSuite) Test_Divide_Float(c *C) {
-	var divisor number
-	var divident number
-	var expectedResult float32
-	var actualResult float32
+func (s *OperationsSuite) Test_DivideFloat(c *C) {
+	var divisor, divident number
+	var expectedResult, actualResult float32
 
 	divisor = 5
 	divident = 2
@@ -81,17 +80,22 @@ func (s *OperationsSuite) Test_Divide_Float(c *C) {
 	c.Assert(actualResult, Equals, expectedResult)
 }
 
-func (s *OperationsSuite) Test_Divide_Zero(c *C) {
+func (s *OperationsSuite) Test_DivideZero(c *C) {
 	var divisor number
 	var divident number
-	var expectedResult string
-	var actual_result string
 
 	divisor = 5
 	divident = 0
-	expectedResult = "NaN"
 
-	actualResult = divisor.Divide(divident)
+	c.Assert(divisor.Divide(divident), Equals, float32(math.Inf(+1)))
+}
 
-	c.Assert(actualResult, Equals, expectedResult)
+func (s *OperationsSuite) Test_DivideInt(c *C) {
+	var divisor number
+	var divident number
+
+	divisor = 5
+	divident = 0
+
+	c.Assert(func() { divisor.DivideInt(divident) }, Panics, "integer divide by zero runtime error: integer divide by zero")
 }

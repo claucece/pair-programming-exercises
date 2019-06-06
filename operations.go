@@ -18,6 +18,22 @@ func (x number) Multiplication(y number) number {
 	return x * y
 }
 
-func (x number) Divide(divident number) (float32, string) {
-	return float32(x / divident), ""
+func (x number) Divide(divident number) float32 {
+	defer func() {
+		if err := recover(); err != nil {
+			panic("integer divide by zero runtime error: integer divide by zero")
+		}
+	}()
+
+	return (float32(x) / float32(divident))
+}
+
+func (x number) DivideInt(divident number) number {
+	defer func() {
+		if err := recover(); err != nil {
+			panic("integer divide by zero runtime error: integer divide by zero")
+		}
+	}()
+
+	return x / divident
 }
